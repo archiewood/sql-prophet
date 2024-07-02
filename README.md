@@ -1,4 +1,7 @@
-# Evidence Template Project
+# SQL Prophet
+
+Time series forecasting with DuckDB SQL and Evidence.
+
 
 ## Using Codespaces
 
