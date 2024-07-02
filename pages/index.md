@@ -66,12 +66,12 @@ with coefficients as (
     select
         regr_intercept(y, time_index) as trend_intercept,
         regr_slope(y, time_index) as trend_slope,
-        corr(y, sin1) * stddev_samp(y) / stddev_samp(sin1) as beta_sin1,
-        corr(y, cos1) * stddev_samp(y) / stddev_samp(cos1) as beta_cos1,
-        corr(y, sin4) * stddev_samp(y) / stddev_samp(sin4) as beta_sin4,
-        corr(y, cos4) * stddev_samp(y) / stddev_samp(cos4) as beta_cos4,
-        corr(y, sin12) * stddev_samp(y) / stddev_samp(sin12) as beta_sin12,
-        corr(y, cos12) * stddev_samp(y) / stddev_samp(cos12) as beta_cos12,
+        regr_slope(y, sin1) as beta_sin1,
+        regr_slope(y, cos1) as beta_cos1,
+        regr_slope(y, sin4) as beta_sin4,
+        regr_slope(y, cos4) as beta_cos4,
+        regr_slope(y, sin12) as beta_sin12,
+        regr_slope(y, cos12) as beta_cos12,
         avg(y) as mean_y,
         avg(sin1) as mean_sin1,
         avg(cos1) as mean_cos1,
@@ -92,14 +92,14 @@ with predictions as (
         f.ds,
         f.y,
         c.trend_intercept + c.trend_slope * f.time_index as trend_yhat,
-        case 
-            when '${inputs.components.value}'='trend' then 0
-            when '${inputs.components.value}'='yearly' then 
+        case '${inputs.components.value}'
+            when 'trend' then 0
+            when 'yearly' then 
             c.beta_sin1 * (f.sin1 - c.mean_sin1) + c.beta_cos1 * (f.cos1 - c.mean_cos1) 
-            when '${inputs.components.value}'='quarterly' then 
+            when 'quarterly' then 
             c.beta_sin1 * (f.sin1 - c.mean_sin1) + c.beta_cos1 * (f.cos1 - c.mean_cos1) 
             + c.beta_sin4 * (f.sin4 - c.mean_sin4) + c.beta_cos4 * (f.cos4 - c.mean_cos4)
-            when '${inputs.components.value}'='monthly' then
+            when 'monthly' then
             c.beta_sin1 * (f.sin1 - c.mean_sin1) + c.beta_cos1 * (f.cos1 - c.mean_cos1) 
             + c.beta_sin4 * (f.sin4 - c.mean_sin4) + c.beta_cos4 * (f.cos4 - c.mean_cos4)
             + c.beta_sin12 * (f.sin12 - c.mean_sin12) + c.beta_cos12 * (f.cos12 - c.mean_cos12)
