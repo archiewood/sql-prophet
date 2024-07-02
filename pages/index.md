@@ -72,7 +72,6 @@ with coefficients as (
         regr_slope(y, cos4) as beta_cos4,
         regr_slope(y, sin12) as beta_sin12,
         regr_slope(y, cos12) as beta_cos12,
-        avg(y) as mean_y,
         avg(sin1) as mean_sin1,
         avg(cos1) as mean_cos1,
         avg(sin4) as mean_sin4,
