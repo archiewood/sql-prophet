@@ -3,43 +3,27 @@
 Time series forecasting with DuckDB SQL and Evidence.
 
 
+# Running
+
 ## Using Codespaces
 
-If you are using this template in Codespaces, click the `Start Evidence` button in the bottom status bar. This will install dependencies and open a preview of your project in your browser - you should get a popup prompting you to open in browser.
+Click the big green button that says `Code` and then Codespaces > Open Codespace
 
-Or you can use the following commands to get started:
+Once open, click the `Start Evidence` button in the bottom status bar.
 
-```bash
-npm install
-npm run sources
-npm run dev -- --host 0.0.0.0
-```
-
-See [the CLI docs](https://docs.evidence.dev/cli/) for more command information.
-
-**Note:** Codespaces is much faster on the Desktop app. After the Codespace has booted, select the hamburger menu → Open in VS Code Desktop.
-
-## Get Started from VS Code
-
-The easiest way to get started is using the [VS Code Extension](https://marketplace.visualstudio.com/items?itemName=evidence-dev.evidence):
-
-1. Install the extension from the VS Code Marketplace
-2. Open the Command Palette (Ctrl/Cmd + Shift + P) and enter `Evidence: New Evidence Project`
-3. Click `Start Evidence` in the bottom status bar
-
-## Get Started using the CLI
+## CLI
 
 ```bash
-npx degit evidence-dev/template my-project
-cd my-project 
+npx degit archiewood/sql-prophet sql-prophet
+cd sql-prophet
 npm install 
 npm run sources
 npm run dev 
 ```
 
-Check out the docs for [alternative install methods](https://docs.evidence.dev/getting-started/install-evidence) including Docker, Github Codespaces, and alongside dbt.
-
-
+## Requirements
+- Node 18/20
+- npm
 
 ## Learning More
 
