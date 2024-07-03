@@ -13,6 +13,12 @@ Forecasting and fitting with SQL
 <Slider title="Forecast Years" defaultValue=0 name=forecast_years max=5/>
 </Grid>
 
+<TextInput name=starting_balance title="Starting Cash Balance" defaultValue=55000/>
+
+<TextInput name=burn title="Monthly Burn" defaultValue=10000/>
+
+
+
 ```sql weekly_sales
 with weekly_sales as (
     select 
@@ -115,18 +121,34 @@ select
     case 
         when ds >= '2021-12-31' then trend_yhat + seasonality_yhat 
         else null 
-        end as forecast
+        end as forecast,
+    ${inputs.starting_balance}::double + sum(coalesce(historic, trend_plus_seasonality) - ${inputs.burn}::double/4) over (order by ds) as cash_balance,
 from predictions
 ```
+
+<Grid cols=2>
 
 <LineChart
   data={sales_fit}
   x=ds
   y={['historic','trend', 'trend_plus_seasonality']}
+  yFmt=usd
   title="Sales by Week, Forecast"
   colorPalette={['#2269A4', '#44A0BF', '#ff7300']}
   renderer=svg
 />
+
+
+<LineChart
+  data={sales_fit}
+  x=ds
+  y=cash_balance
+  yFmt=usd
+  title="Cash Balance by Week, Forecast"
+  legend
+/>
+
+</Grid>
 
 ```sql sales_by_year_forecast
 select 
