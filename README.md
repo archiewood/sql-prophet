@@ -1,6 +1,6 @@
 # SQL Prophet
 
-Time series forecasting with DuckDB SQL and Evidence.
+Time series forecasting with DuckDB SQL and Evidence. [Live app &rarr;](https://sql-prophet.evidence.app/)
 
 ![Forecasting using SQL](static/output.png)
 
