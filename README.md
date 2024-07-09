@@ -2,6 +2,8 @@
 
 Time series forecasting with DuckDB SQL and Evidence.
 
+![Forecasting using SQL](static/output.png)
+
 
 # Running
 

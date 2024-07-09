@@ -2,6 +2,14 @@
 
 Forecasting and fitting with SQL
 
+<Details title='Show SQL'>
+
+Click on the top right `...` menu and select Show Queries
+
+</Details>
+
+
+
 <Grid cols=2>
 <Dropdown name=components title="Forecast Components" order=false>
     <DropdownOption value=trend valueLabel=Linear/>
